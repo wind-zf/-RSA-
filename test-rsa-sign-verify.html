@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<header>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="jsencrypt.min.js"></script>
+    <script type="text/javascript" src="aes.js"></script>
+    <script type="text/javascript" src="jsrsasign-all-min.js"></script>
+    <script type="text/javascript" src="starscube-utils.js"></script>
+    <script>
+    $(function() {
+    	$('#encryptBtn').click(function(event) {
+    		var oriText = $('#oriText').val();
+    		$('#encryptRes').val(rsaCrypt(oriText));
+    	});
+
+    	$('#verifyBtn').click(function(event) {
+    		var signRes = $('#signRes').val();
+    		var signOri = $('#signOri').val();
+    		var flag = rsaVerify2(signOri,signRes);
+    		alert(flag);
+    	});
+    })
+    </script>
+</header>
+
+<body>
+	<label>这是公钥</label>
+    <input type="text" id="publicKey" value="-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDoJwxlhXoEbdFgyx3xCd7x95El
+e53bz78m+Eqe8akDXpGcSVl4YDYea9y3A3TwjdE3JPkHDrJ89A1JRTcHSjq1ky1J
+jq0c1d4BKFS9sIc7Tb1cXydtZXyImPZNzTzYm+U/4LBt0Sbd1wV5it6B8fGLujZ2
+Phh4jcLMj4i0JYzkpwIDAQAB
+-----END PUBLIC KEY-----" size="100">
+    <br />
+    <br />
+    <hr />
+    <label>待加密字符串：</label>
+    <input id="oriText" type="text" value="星视融通">
+    <input type="button" id="encryptBtn" value="Rsa加密">
+    <input id="encryptRes" type="text" value="">
+    <br />
+    <br />
+    <hr />
+    <label>签名	结果：</label>
+    <input type="text" id="signRes" value="7a872f28eebd9c63fdc7c1e678ab7d4550d4b75d6fa8a2d6b842ce4eb9d2a2a6600e14178ef90445408ab6056fa7ab23a77a01fb0bbb1696d8fff7d5e15f4eaf0e97e93ea72ad409726c3d5172acd22c00c524ca7dd6a81cbe3eebf8dcd443e2a08f63e1f2a7ec0ed981ab0d41a8f007ef4bbcfdee6d3569be7d90d1deeef310">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>签名字符串：</label>
+    <input type="text" name="signOri" id="signOri" value="星视融通" />
+    <input type="button" id="verifyBtn" value="验证签名">
+
+    
+</body>
+
+</html>
